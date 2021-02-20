@@ -13,9 +13,10 @@ class ViewController: UIViewController {
   
   var timer: Timer?
   var elapsedSeconds = 0
-  var maxSeconds = 60
+  var maxSeconds: Int = 60
   
   var alarmPlayer: AVAudioPlayer?
+  let notificationId = UUID().uuidString
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,6 +27,15 @@ class ViewController: UIViewController {
     } catch {
       print("cannot load alarm sound, error: \(error)")
     }
+    
+    let center = UNUserNotificationCenter.current()
+    center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+      
+      if let error = error {
+        print(error)
+      }
+    }
+    print("noti id: \(notificationId)")
   }
   
   @objc func timerCallback() {
@@ -65,6 +75,7 @@ class ViewController: UIViewController {
     
     resetTimer()
     timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.timerCallback), userInfo: nil, repeats: true)
+    createNotification()
   }
   
   func updateUI() {
@@ -81,6 +92,36 @@ class ViewController: UIViewController {
   func playSound() {
     alarmPlayer?.currentTime = 0
     alarmPlayer?.play()
+  }
+  
+  func createNotification() {
+    let currentDate = Date()
+    
+    let content = UNMutableNotificationContent()
+    content.title = "Time up!"
+    content.body = "\(maxSeconds) seconds have passed since \(currentDate.description(with: Locale.current))"
+    // for simplicity, we play the default sound but we can actually
+    // use any sound here
+    content.sound = UNNotificationSound.default
+    
+    let triggerDate = currentDate.addingTimeInterval( TimeInterval(maxSeconds))
+    var dateComps = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: triggerDate)
+    dateComps.timeZone = Calendar.current.timeZone
+    print("will notify user at \(dateComps)")
+    
+    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComps, repeats: false)
+
+    // Create the request
+    let request = UNNotificationRequest(identifier: notificationId, content: content, trigger: trigger)
+
+    // Schedule the request with the system.
+    let notificationCenter = UNUserNotificationCenter.current()
+    notificationCenter.add(request) { (error) in
+      if error != nil {
+        // Handle any errors.
+        print("cannot add notification")
+      }
+    }
   }
   
 }
