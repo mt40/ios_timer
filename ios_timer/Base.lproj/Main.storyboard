@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="FJA-NP-baH">
-                                <rect key="frame" x="20" y="219" width="374" height="458.5"/>
+                                <rect key="frame" x="20" y="130" width="374" height="636.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The timer should continue to run even when app is in background and phone is locked." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHE-RF-vOC">
                                         <rect key="frame" x="1.5" y="0.0" width="371" height="41"/>
@@ -31,19 +31,43 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="C94-jt-aLd">
-                                        <rect key="frame" x="87" y="336.5" width="200" height="122"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="C94-jt-aLd">
+                                        <rect key="frame" x="90.5" y="336.5" width="193" height="300"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FuL-xL-Ndf">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="36"/>
+                                                <rect key="frame" x="5" y="0.0" width="183" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <state key="normal" title="Start timer for 1 minute"/>
+                                                <state key="normal" title="Start timer for 10 sec"/>
                                                 <connections>
-                                                    <action selector="startTimerBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kXC-QR-iQC"/>
+                                                    <action selector="startTimer10sBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iJL-Dc-1Vq"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q4A-JB-ZMs">
+                                                <rect key="frame" x="10.5" y="66" width="172" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="Start timer for 1 min"/>
+                                                <connections>
+                                                    <action selector="startTimer1mBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cgs-ki-cMW"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhR-mg-5A7">
+                                                <rect key="frame" x="4" y="132" width="185" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="Start timer for 5 mins"/>
+                                                <connections>
+                                                    <action selector="startTimer5mBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L97-rC-0tq"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZWa-uS-4mW">
+                                                <rect key="frame" x="0.0" y="198" width="193" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="Start timer for 15 mins"/>
+                                                <connections>
+                                                    <action selector="startTimer15mBtnClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="x4u-Q1-xUC"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cu-xQ-Zlr">
-                                                <rect key="frame" x="79.5" y="86" width="41" height="36"/>
+                                                <rect key="frame" x="76" y="264" width="41" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <state key="normal" title="Stop"/>
                                                 <connections>
@@ -64,8 +88,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="startTimerBtn" destination="FuL-xL-Ndf" id="0OT-Co-e3l"/>
-                        <outlet property="stopTimerBtn" destination="1cu-xQ-Zlr" id="Lnd-FH-C1l"/>
                         <outlet property="timeLabel" destination="Z5l-VZ-EqI" id="qzh-jP-XaB"/>
                     </connections>
                 </viewController>

@@ -10,12 +10,10 @@ import AVFoundation
 
 class ViewController: UIViewController {
   @IBOutlet var timeLabel: UILabel!
-  @IBOutlet var startTimerBtn: UIButton!
-  @IBOutlet var stopTimerBtn: UIButton!
   
   var timer: Timer?
   var elapsedSeconds = 0
-  var maxSeconds = 5
+  var maxSeconds = 60
   
   var alarmPlayer: AVAudioPlayer?
   
@@ -40,16 +38,33 @@ class ViewController: UIViewController {
     }
   }
   
-  @IBAction func startTimerBtnClicked(_ sender: UIButton) {
-    print("start timer")
-    
-    resetTimer()
-    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.timerCallback), userInfo: nil, repeats: true)
+  @IBAction func startTimer10sBtnClicked(_ sender: UIButton) {
+    startTimerFor(seconds: 10)
   }
-
+  
+  @IBAction func startTimer1mBtnClicked(_ sender: UIButton) {
+    startTimerFor(seconds: 60)
+  }
+  
+  @IBAction func startTimer5mBtnClicked(_ sender: UIButton) {
+    startTimerFor(seconds: 5 * 60)
+  }
+  
+  @IBAction func startTimer15mBtnClicked(_ sender: UIButton) {
+    startTimerFor(seconds: 5 * 60)
+  }
+  
   @IBAction func stopTimerBtnClicked(_ sender: UIButton) {
     print("stop timer")
     resetTimer()
+  }
+  
+  func startTimerFor(seconds: Int) {
+    maxSeconds = seconds
+    print("start timer for \(maxSeconds) seconds")
+    
+    resetTimer()
+    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.timerCallback), userInfo: nil, repeats: true)
   }
   
   func updateUI() {
